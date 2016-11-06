@@ -35,13 +35,13 @@ When doing this problem, consider using the following SageCell:
 List=[(1, 0.25), (2, 0.13), (3, .36), (4, 0.26)] 
 #Enter as a list of pairs each (x, p(x))
 #NO NEED TO EDIT AFTER THIS LINE!!!
-dummy=0
+dum=0
 totalprob=0
 for i in range(len(List)):
     totalprob=totalprob+List[i][1]
     if List[i][1]<0 or List[i][1]>1:
-        dummy=1
-if dummy==1 or totalprob!=1:
+        dum=1
+if dum==1 or totalprob!=1:
     print('This does not represent a probability distribution!')
 else:
     EVX=0
