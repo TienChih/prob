@@ -32,23 +32,24 @@ Find the following:
 When doing this problem, consider using the following SageCell:
 
 \begin{sageCell}
-List=[(1, 0.25), (2, 0.13), (3, .36), (4, 0.26)]
+X=[1,2,3,4]
+P=[.25, .13, .36, .26]
 #Enter as a list of pairs each (x, p(x))
 #NO NEED TO EDIT AFTER THIS LINE!!!
 dum=0
 totalprob=0
-for i in range(len(List)):
-    totalprob=totalprob+List[i][1]
-    if List[i][1]<0 or List[i][1]>1:
+for i in range(len(P)):
+    totalprob=totalprob+P[i]
+    if P[i]<0 or P[i]>1:
         dum=1
-if dum==1 or totalprob!=1:
+if dum==1 or totalprob!=1 or len(P)!=len(X):
     print('This does not represent a probability distribution!')
 else:
     EVX=0
     EVXs=0
     for i in range(len(List)):
-        EVX=EVX+List[i][0]*List[i][1]
-        EVXs=EVXs+List[i][0]^2*List[i][1]
+        EVX=EVX+X[i]*P[i]
+        EVXs=EVXs+X[i]^2*P[i]
     Var=EVXs-EVX^2
     std=(Var)^(.5)
     print('The expected value is '+`EVX`)
