@@ -1,0 +1,135 @@
+\documentclass{ximera}
+      
+\title{Tools}
+      
+\begin{document}
+      
+\begin{abstract}
+      
+Some Useful Tools.
+      
+\end{abstract}
+      
+\maketitle
+       
+\begin{enumerate} 
+\item Mean, Median, Mode, and Standard Deviation and Quartiles:
+
+\begin{sageCell}
+L=[1,1,2,3,4,5, 1, 1] # Input the list of Data Here:
+
+L=sorted(L); L
+
+
+print('The mean is: '+`mean(L)`)
+print('The median is: '+`median(L)`)
+print('The mode(s) is (are): '+`mode(L)`)
+print('The standard deviation is: '+`std(L)`)
+
+Z=(len(L))/2
+ZI=floor(Z)
+
+firsthalf=[]
+secondhalf=[]
+
+for i in range(ZI):
+    firsthalf.append(L[i])
+
+    
+for j in range(ZI):
+    secondhalf.append(L[len(L)-j-1])
+
+
+print('Q1 is: '+`median(firsthalf)`)
+print('Q3 is: '+`median(secondhalf)`)
+\end{sageCell} 
+ Enter the list of data as L. 
+ 
+ \item Expected Value:
+ 
+ \begin{sageCell}
+ List=[(0,.35), (1,.15), (2,.45), (3,.05)] #Enter as a list of pairs each (x, p(x))
+
+dummy=0
+totalprob=0
+
+for i in range(len(List)):
+    totalprob=totalprob+List[i][1]
+    if List[i][1]<0 or List[i][1]>1:
+        dummy=1
+
+if dummy==1 or totalprob!=1:
+    print('This does not represent a probability distribution!')
+else:
+    EVX=0
+    EVXs=0
+    for i in range(len(List)):
+        EVX=EVX+List[i][0]*List[i][1]
+        EVXs=EVXs+List[i][0]^2*List[i][1]
+    Var=EVXs-EVX^2
+    std=(Var)^(.5)
+    print('The expected value is '+`EVX`)
+    print('The variance is '+`Var`)
+    print('The standard deviation is '+`std`)
+ \end{sageCell}
+ Enter the discrete distribution as pairs $(x, P(X=x))$. 
+ 
+\item Binomial Distributions:
+
+\begin{sageCell}
+n = 5 #Enter the number of trials here
+p = .7 #Enter
+
+binomdist=[]
+
+for i in range(n+1):
+    binomdist.append((i, binomial(n,i)*p^i*(1-p)^(n-i)))
+
+chartlist=[]
+for i in range(n+1):
+    chartlist.append(binomdist[i][1])
+    
+
+bar_chart(chartlist)    
+    
+print('The binomial distribution with '+`n`+' trials each with probability of success '+`p`+' is:')
+binomdist
+print('The expected value is: '+`n*p`)
+print('with variance '+`n*p*(1-p)`)
+print('and standard deviation '+`(n*p*(1-p))^(.5)`)
+\end{sageCell}
+Enter in the number of trials $n$ and the probability of success per trial $p$.  If the code is improperly indented, copy and paste: 
+
+
+
+ \item Normal Curves
+ 
+ \begin{onlineOnly}
+$$\graph[xmin=-2,xmax=2,ymin=-0.5,ymax=1, panel]{N=e^{-x^2/2}/(2\pi)^{(0.5)}, P=\int_{z_1}^{z_2} N dx, a=-1, b=1, s=1, m=0, z_1=(a-m)/s, z_2=(b-m)/s, 0<y<N\left\{z_1<x<z_2\right\}}$$
+\end{onlineOnly}
+
+\begin{sageCell}
+from scipy.stats import norm
+
+normdist = norm()
+
+mean=120 # Put the mean of the distribution here
+std=30  # Put the standard deviation of the distribution here.
+P=0.4  # P is the value such that everything to the left of X is P
+
+X=normdist.ppf(P)*std+mean
+
+print('The area to the left of '+`X`); print(' on the normal curve with mean '+`mean`); print(' and standard deviation '+`std`); print(' is  '+`P`)
+\end{sageCell}
+
+\end{enumerate}
+
+ 
+      
+
+
+
+
+
+
+\end{document}
